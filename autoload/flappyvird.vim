@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 let s:CURSOR_OFF = 0
-let s:CURSOR_ON = 1
+let s:CURSOR_ON  = 1
 
 let s:STATE_LOOP     = 1
 let s:STATE_DIE      = 2
@@ -19,7 +19,7 @@ function! s:rand() abort
   return (s:seed < 0 ? s:seed - 0x80000000 : s:seed) / 0x10000 % 0x8000
 endfunction
 
-function! s:toggle_cursor(f)
+function! s:toggle_cursor(f) abort
   let &t_ve = a:f ? s:t_ve : ''
 endfunction
 
