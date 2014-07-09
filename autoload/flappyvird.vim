@@ -1,7 +1,5 @@
 scriptencoding utf-8
 
-let s:datadir = expand('<sfile>:h:h') . '/data'
-
 let s:cursor_off = 0
 let s:cursor_on = 1
 let s:t_ve = &t_ve
@@ -54,13 +52,7 @@ function! s:stage_wipeout() abort
   bdelete
 endfunction
 
-function! s:loaddata() abort
-  return eval(join(readfile(s:datadir . '/stage.json'), ''))
-endfunction
-
 function! s:loop()
-  let sf = s:loaddata()
-
   call s:stage_init()
 
   " clear whole screen
@@ -84,8 +76,9 @@ function! s:loop()
 
   let dy = 40
   let si = 0
+  let sl = 0
   let sc = 0
-  let st = sf[si][0]
+  let st = 100
   let cf = get(g:, 'flappyvird_face', '(; @_@)')
   let cw = len(cf)
   let cb = getline(ry)[jx :jx+cw-1]
@@ -187,22 +180,20 @@ function! s:loop()
 
     if st == 0
       " draw bar
+      let bw = 4 + s:rand() % (7 - sl / 5)
+      let bb = 1 + s:rand() % (sh - bw - 3)
       for i in range(1, sh)
         let l = getline(i)
-        let of = i >= sf[si][1] && i <= sf[si][1] + sf[si][2]
-        call setline(i, l[:ww-sf[si][3]] . repeat(of ? ' ' : '*', sf[si][3]))
+        let of = i >= bb && i <= bb + bw
+        call setline(i, l[:ww] . repeat(of ? ' ' : '*', 3))
       endfor
 
       " shift to next bar
       let si += 1
 
-      " if it's end of bars, finish
-      if si == len(sf)
-        let state = s:STATE_FINISH
-        continue
-      endif
       " set next bar timer
-      let st = sf[si][0]
+      let st = (60 - sl) + s:rand() % 20
+      let sl += 1
     else
       let st -= 1
     endif
