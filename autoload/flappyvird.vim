@@ -58,7 +58,7 @@ function! s:loaddata() abort
   return eval(join(readfile(s:datadir . '/stage.json'), ''))
 endfunction
 
-function! flappyvird#start() abort
+function! s:loop()
   let sf = s:loaddata()
 
   call s:stage_init()
@@ -96,6 +96,8 @@ function! flappyvird#start() abort
   call s:srand(localtime())
 
   call setline(sh + 2, printf(" SCORE: %6d", 0))
+
+  let retry = 0
   while 1
     let c = getchar(0)
     if c == 27 || c == 113 " esc or q
@@ -103,6 +105,10 @@ function! flappyvird#start() abort
       break
     endif
     if state == s:STATE_FINISH
+      if c == 114 " r
+        let retry = 1
+        break
+      endif
       " do nothing
       continue
     endif
@@ -196,6 +202,12 @@ function! flappyvird#start() abort
   endwhile
 
   call s:stage_wipeout()
+  return retry
+endfunction
+
+function! flappyvird#start() abort
+  while s:loop()
+  endwhile
 endfunction
 
 " vim:set et:
