@@ -57,7 +57,7 @@ function! s:loop()
   " clear whole screen
   let ww = winwidth('.')  " window width
   let wh = winheight('.') " window height
-  let sh = 20
+  let sh = 20 " stage height
 
   " fill screen
   for i in range(1, wh)
@@ -69,19 +69,19 @@ function! s:loop()
   let state = s:STATE_LOOP
 
   let rate = 100
-  let jx = 20
-  let jy = 1600
-  let ry = jy / rate
+  let jx = 20        " x offset
+  let jy = 1600      " y offset
+  let ry = jy / rate " real y
 
-  let dy = 40
-  let sl = 0
-  let sc = 0
-  let st = 100
-  let cf = get(g:, 'flappyvird_face', '(; @_@)')
-  let cw = len(cf)
-  let cb = getline(ry)[jx :jx+cw-1]
+  let dy = 40  " diff y
+  let sl = 0   " stage level
+  let sc = 0   " score
+  let st = 100 " stage timer
+  let cf = get(g:, 'flappyvird_face', '(; @_@)') " character face
+  let cw = len(cf)                               " character width
+  let cb = getline(ry)[jx :jx+cw-1]              " character background
 
-  let ss = 20
+  let ss = 20        " sleep! sleep!
   let rt = reltime()
 
   call s:srand(localtime())
