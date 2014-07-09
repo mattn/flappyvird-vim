@@ -4,14 +4,9 @@ let s:cursor_off = 0
 let s:cursor_on = 1
 let s:t_ve = &t_ve
 
-function! s:toggle_cursor(f)
-  let &t_ve = a:f ? s:t_ve : ''
-endfunction
-
 let s:STATE_LOOP     = 1
 let s:STATE_DIE      = 2
-let s:STATE_GAMEOVER = 3
-let s:STATE_FINISH   = 4
+let s:STATE_FINISH   = 3
 
 let s:seed = 0
 function! s:srand(seed) abort
@@ -21,6 +16,10 @@ endfunction
 function! s:rand() abort
   let s:seed = s:seed * 214013 + 2531011
   return (s:seed < 0 ? s:seed - 0x80000000 : s:seed) / 0x10000 % 0x8000
+endfunction
+
+function! s:toggle_cursor(f)
+  let &t_ve = a:f ? s:t_ve : ''
 endfunction
 
 function! s:stage_init() abort
