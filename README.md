@@ -6,6 +6,10 @@
 
     :FlappyVird
 
+* space : Jump
+* q or ESC : Exit
+* p : Pause
+
 ## License
 
 MIT
