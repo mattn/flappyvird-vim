@@ -1,12 +1,13 @@
 scriptencoding utf-8
 
-let s:cursor_off = 0
-let s:cursor_on = 1
-let s:t_ve = &t_ve
+let s:CURSOR_OFF = 0
+let s:CURSOR_ON = 1
 
 let s:STATE_LOOP     = 1
 let s:STATE_DIE      = 2
 let s:STATE_FINISH   = 3
+
+let s:t_ve = &t_ve
 
 let s:seed = 0
 function! s:srand(seed) abort
@@ -42,12 +43,12 @@ function! s:stage_init() abort
   hi FlappyVirdGreen2 ctermfg=yellow ctermbg=yellow guifg=yellow guibg=yellow
   syn match FlappyVirdBar '*'
   hi FlappyVirdBar ctermfg=magenta ctermbg=magenta guifg=magenta guibg=magenta
-  call s:toggle_cursor(s:cursor_off)
+  call s:toggle_cursor(s:CURSOR_OFF)
   redraw
 endfunction
 
 function! s:stage_wipeout() abort
-  call s:toggle_cursor(s:cursor_on)
+  call s:toggle_cursor(s:CURSOR_ON)
   bdelete
 endfunction
 
