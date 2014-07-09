@@ -9,6 +9,7 @@
 * space : Jump
 * q or ESC : Exit
 * p : Pause
+* r : Retry
 
 ## License
 
