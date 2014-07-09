@@ -97,15 +97,22 @@ function! s:loop()
 
   call setline(sh + 2, printf(" SCORE: %6d", 0))
 
+  let pause = 0
   let retry = 0
   while 1
     let c = getchar(0)
-    if c == 27 || c == 113 " esc or q
+    if c == 27 || c == 113 " esc or q to quit
       " quit loop
       break
+    elseif c == 112 " p to pause
+      let pause = !pause
+    endif
+
+    if pause
+      continue
     endif
     if state == s:STATE_FINISH
-      if c == 114 " r
+      if c == 114 " r to retry
         let retry = 1
         break
       endif
