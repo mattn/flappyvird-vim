@@ -6,10 +6,10 @@
 
     :FlappyVird
 
-# License
+## License
 
 MIT
 
-# Author
+## Author
 
 Yasuhiro Matsumoto (a.k.a mattn)
