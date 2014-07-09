@@ -86,11 +86,11 @@ function! flappyvird#start() abort
   let si = 0
   let sc = 0
   let st = sf[si][0]
-  let cf = "(; @_@)"
-  let cw = strdisplaywidth(cf)
+  let cf = get(g:, 'flappyvird_face', '(; @_@)')
+  let cw = len(cf)
   let cb = getline(ry)[jx :jx+cw-1]
 
-  let ss = 15
+  let ss = 20
   let rt = reltime()
 
   call s:srand(localtime())
