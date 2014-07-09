@@ -74,7 +74,6 @@ function! s:loop()
   let ry = jy / rate
 
   let dy = 40
-  let si = 0
   let sl = 0
   let sc = 0
   let st = 100
@@ -186,9 +185,6 @@ function! s:loop()
         let of = i >= bb && i <= bb + bw
         call setline(i, l[:ww] . repeat(of ? ' ' : '*', 3))
       endfor
-
-      " shift to next bar
-      let si += 1
 
       " set next bar timer
       let st = (60 - sl) + s:rand() % 20
