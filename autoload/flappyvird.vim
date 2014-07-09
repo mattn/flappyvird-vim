@@ -86,11 +86,7 @@ function! flappyvird#start() abort
   let si = 0
   let sc = 0
   let st = sf[si][0]
-  if $LANG =~ '^ja'
-    let cf = "(;ﾟДﾟ)"
-  else
-    let cf = "(; @_@)"
-  endif
+  let cf = "(; @_@)"
   let cw = strdisplaywidth(cf)
   let cb = getline(ry)[jx :jx+cw-1]
 
