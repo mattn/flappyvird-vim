@@ -9,6 +9,8 @@ let s:STATE_FINISH   = 3
 
 let s:t_ve = &t_ve
 
+let s:top_score = 0
+
 let s:seed = 0
 function! s:srand(seed) abort
   let s:seed = a:seed
@@ -87,7 +89,8 @@ function! s:loop()
 
   call s:srand(localtime())
 
-  call setline(sh + 2, printf(" SCORE: %6d", 0))
+  call setline(sh + 2, printf(" SCORE: %10d", 0))
+  call setline(sh + 3, printf(" TOP SCORE: %6d", s:top_score))
 
   let pause = 0
   let retry = 0
@@ -137,7 +140,11 @@ function! s:loop()
 
       if getline(sh)[jx-2: jx-1] == '* '
         let sc += 1
-        call setline(sh + 2, printf(" SCORE: %6d", sc))
+        call setline(sh + 2, printf(" SCORE: %10d", sc))
+        if sc > s:top_score
+	  let s:top_score = sc
+	  call setline(sh + 3, printf(" TOP SCORE: %6d", s:top_score))
+	endif
       endif
     endif
 
