@@ -177,6 +177,7 @@ function! s:loop()
     if cb =~ '\S' || ry < 1 || ry >= sh
       let state = s:STATE_DIE
       let dy = 0
+      let cf = get(g:, 'flappyvird_face', '(; x_x)') " character face
       continue
     endif
 
